@@ -1,0 +1,5 @@
+plugins:
+  basicReg:
+    pluginPath: './sample/plugin/path'
+  absReg:
+    pluginPath: /var/plugin/path

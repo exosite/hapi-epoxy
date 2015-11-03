@@ -1,0 +1,6 @@
+plugins:
+  noop:
+    pluginPath: './'
+  noop-two: {
+    pluginPath: './'
+  }

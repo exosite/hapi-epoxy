@@ -1,0 +1,9 @@
+plugins:
+  regOptions:
+    pluginPath: './sample/plugin/path'
+    registrations:
+      - registrationOptions:
+          once: true
+          routes:
+            prefix: '/api/reg'
+

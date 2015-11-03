@@ -1,0 +1,68 @@
+{
+  "server": {
+    "debug": {
+      "log": [
+        "error",
+        "plugin",
+        "boom"
+      ]
+    },
+    "app": {
+      "testSetting": true
+    },
+    "connections": {
+      "routes": {
+        "cors": {
+          "credentials": true
+        }
+      }
+    }
+  },
+  "connections": [
+    {
+      "host": "127.0.0.1",
+      "port": 8001
+    }
+  ],
+  "plugins": {
+    "auth": {},
+    "utils": [{}],
+    "/var/path/to/session": {
+      "allowedDomains": [
+        "localhost",
+        "s.example.com"
+      ]
+    },
+    "./plugins/api": [
+      {
+        "routes": {
+          "prefix": "/api/v1"
+        },
+        "options": {
+          "showdocs": false
+        }
+      }
+    ],
+    "./plugins/uxtest": [
+      {
+        "select": "uxr-group-142",
+        "options": {
+          "useVersion": 20150901
+        }
+      },
+      {
+        "select": "uxr-group-589",
+        "options": {
+          "useVersion": 20151020
+        }
+      }
+    ],
+    "cdn": [
+      {
+        "routes": {
+          "prefix": "/assetfarm"
+        }
+      }
+    ]
+  }
+}

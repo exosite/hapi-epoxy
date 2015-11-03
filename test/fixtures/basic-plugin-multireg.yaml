@@ -1,0 +1,12 @@
+plugins:
+  multiples:
+    registrations:
+      - registrationOptions:
+          select: primary      
+        pluginOptions:
+          debugLevel: WARN
+      - registrationOptions:
+          select: secondary 
+        pluginOptions:
+          debugLevel: INFO
+

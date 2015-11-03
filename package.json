@@ -1,0 +1,33 @@
+{
+  "name": "hapi-epoxy",
+  "version": "1.0.0",
+  "description": "Flexible YAML configuration for Hapi",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node_modules/gulp/bin/gulp.js test",
+    "test-cov": "node_modules/gulp/bin/gulp.js coverage"
+  },
+  "bin": {
+    "bond": "bin/bond.js"
+  },
+  "author": "adyates",
+  "bugs": "https://github.com/exosite/hapi-epoxy/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exosite/hapi-epoxy.git"
+  },
+  "devDependencies": {
+    "glue": "^2.4.0",
+    "gulp": "^3.9.0",
+    "gulp-istanbul": "^0.10.2",
+    "gulp-jasmine": "^2.1.0",
+    "istanbul": "^0.4.0",
+    "jasmine": "^2.3.2"
+  },
+  "dependencies": {
+    "bossy": "^2.0.0",
+    "hoek": "^2.16.3",
+    "js-yaml": "^3.4.3"
+  }
+}

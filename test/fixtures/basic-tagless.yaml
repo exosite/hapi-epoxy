@@ -1,0 +1,6 @@
+server:
+  debug:
+    log:
+      - error
+      - plugin
+      - boom

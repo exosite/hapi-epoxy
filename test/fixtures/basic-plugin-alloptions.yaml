@@ -1,0 +1,9 @@
+plugins:
+  allOptions:
+    pluginPath: './sample/plugin/path'
+    registrations:
+      - registrationOptions:
+          once: true      
+        pluginOptions:
+          debugLevel: INFO
+

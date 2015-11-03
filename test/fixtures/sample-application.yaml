@@ -1,0 +1,63 @@
+server:
+  debug:
+    log:
+      - error
+      - plugin
+      - boom
+  app:
+    testSetting: !epoxy
+      value: true
+      env: APP_IN_TEST
+  connections:
+    routes:
+      cors:
+        credentials: true
+connections:
+  - host: 127.0.0.1
+    port: 8001
+plugins:
+  # These are dependencies installed with the project.  See repo for details
+  auth:
+  utils:
+    pluginPath: ''
+  session:
+    # Not sure why we do this
+    pluginPath: /var/path/to/
+    registrations:
+    -  pluginOptions:
+         allowedDomains:
+         - localhost
+         - !epoxy
+             value: s.example.com
+             env: APP_SESSION_DOMAIN
+  # This is the API for the site.  But you knew that
+  api:
+    pluginPath: ./plugins/
+    registrations:
+    -  registrationOptions:
+         routes:
+           prefix: /api/v1
+       pluginOptions:
+         # Enable this only on dev and staging environments for now
+         showdocs: !epoxy
+           value: false
+           env: APP_SHOW_API_DOCS
+  uxtest:
+    pluginPath: ./plugins
+    registrations:
+    -  registrationOptions:
+         select: uxr-group-142
+       pluginOptions:
+         # Control version
+         useVersion: 20150901
+    -  registrationOptions:
+         select: uxr-group-589
+       pluginOptions:
+         # Experimental.  Notify R.J. before removal
+         useVersion: 20151020
+  cdn:
+    registrations:
+    - registrationOptions:
+        routes:
+          prefix: /assetfarm
+
