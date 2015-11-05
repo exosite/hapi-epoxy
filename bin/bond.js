@@ -16,16 +16,16 @@ var bossyDefinition = {
   g: {
     description: 'The destination to write the Glue manifest.  If not specified, prints to stdout.',
     alias: 'glue-out',
-    'default': null,
+    default: null,
   },
-}
+};
 
 var args = Bossy.parse(bossyDefinition);
 
 // Deal with the CLI
 if (args instanceof Error) {
   console.error(Bossy.usage(bossyDefinition));
-  return process.exit(1);
+  process.exit(1);
 }
 
 var epoxyFileData = Fs.readFileSync(args.e);
