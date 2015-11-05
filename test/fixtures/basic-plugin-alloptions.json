@@ -1,0 +1,7 @@
+{
+  "plugins": {
+    "./lib/foodtrucks": [
+      {"select": "lunch", "options": {"location": "Broadway"}}
+    ]
+  }
+}

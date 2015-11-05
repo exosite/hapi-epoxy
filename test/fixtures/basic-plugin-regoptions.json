@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "authy": [{
+      "once": true,
+      "routes": {
+        "prefix": "/api/authy"
+      }
+    }]
+  }
+}

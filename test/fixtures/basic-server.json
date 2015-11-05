@@ -1,0 +1,27 @@
+{
+  "server": {
+    "debug": {
+      "log": [
+        "error",
+        "plugin",
+        "boom"
+      ]
+    },
+    "app": {
+      "testSetting": true
+    },
+    "connections": {
+      "routes": {
+        "cors": {
+          "credentials": true
+        }
+      }
+    }
+  },
+  "connections": [
+    {
+      "host": "127.0.0.1",
+      "port": 8001
+    }
+  ]
+}

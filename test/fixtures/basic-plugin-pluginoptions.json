@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "stand": {
+      "fruits": [
+        "apple",
+        "orange"
+      ]
+    },
+    "market": [
+      {"options": {"location": "Main St.", "allyear": true}}
+    ]
+  }
+}

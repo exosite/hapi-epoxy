@@ -3,3 +3,5 @@ plugins:
     pluginPath: './sample/plugin/path'
   absReg:
     pluginPath: /var/plugin/path
+  dotReg:
+    pluginPath: .

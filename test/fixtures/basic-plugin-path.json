@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "amodule": null,
+    "./a/relpath": {},
+    "./relpath2": [{}],
+    "/an/abspath": [{}]
+  }
+}

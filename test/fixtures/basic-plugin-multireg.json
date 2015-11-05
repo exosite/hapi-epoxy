@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "markets": [
+      {"select": "bnm", "options": {"location": "Main St.", "allyear": true}},
+      {"select": "oam", "options": {"location": "Market Square", "allyear": false}}
+    ]
+  }
+}
