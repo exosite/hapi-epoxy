@@ -18,7 +18,9 @@
     "type": "git",
     "url": "https://github.com/exosite/hapi-epoxy.git"
   },
+  "engines": {"node": ">=0.10.41", "npm": ">=2.0.0"},
   "devDependencies": {
+    "hapi": "^10.x.x",
     "glue": "^2.4.0",
     "gulp": "^3.9.0",
     "gulp-istanbul": "^0.10.2",
