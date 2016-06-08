@@ -1,8 +1,12 @@
 {
-  "plugins": {
-    "markets": [
-      {"select": "bnm", "options": {"location": "Main St.", "allyear": true}},
-      {"select": "oam", "options": {"location": "Market Square", "allyear": false}}
-    ]
-  }
+  "registrations": [
+    {"plugin": {
+      "register": "markets",
+      "options": {"location": "Main St.", "allyear": true}
+    }, "options": {"select": "bnm"}},
+    {"plugin": {
+      "register": "markets",
+      "options": {"location": "Market Square", "allyear": false}
+    }, "options": {"select": "oam"}}
+  ]
 }

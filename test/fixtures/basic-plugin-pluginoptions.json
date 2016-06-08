@@ -1,13 +1,17 @@
 {
-  "plugins": {
-    "stand": {
-      "fruits": [
-        "apple",
-        "orange"
-      ]
-    },
-    "market": [
-      {"options": {"location": "Main St.", "allyear": true}}
-    ]
-  }
+  "registrations": [
+    {"plugin": {
+      "register": "stand",
+      "options": {
+        "fruits": [
+          "apple",
+          "orange"
+        ]
+      }
+    }},
+    {"plugin": {
+      "register": "market",
+      "options": {"location": "Main St.", "allyear": true}
+    }}
+  ]
 }

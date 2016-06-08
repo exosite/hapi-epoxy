@@ -69,7 +69,7 @@ describe('The Epoxy file parsing', function() {
   it('will handle a plugin with no settings at all', function(done) {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-plugin-noop.yaml'), EPOXY_DEFAULT_CONFIG)
-    ).toEqual({plugins: {'./noop': [{}], './noop-two': [{}]}});
+    ).toEqual({registrations: [{plugin: './noop'}, {plugin: './noop-two'}]});
     done();
   });
 
@@ -77,11 +77,11 @@ describe('The Epoxy file parsing', function() {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-plugin-path.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({
-      plugins: {
-        './sample/plugin/path/basicReg': [{}],
-        '/var/plugin/path/absReg': [{}],
-        './dotReg': [{}],
-      },
+      registrations: [
+        {plugin: './sample/plugin/path/basicReg'},
+        {plugin: '/var/plugin/path/absReg'},
+        {plugin: './dotReg'},
+      ],
     });
     done();
   });
@@ -89,7 +89,7 @@ describe('The Epoxy file parsing', function() {
   it('will handle a plugin that is in node_modules', function(done) {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-module-path.yaml'), EPOXY_DEFAULT_CONFIG)
-    ).toEqual({plugins: {npmReg: [{}]}});
+    ).toEqual({registrations: [{plugin: 'npmReg'}]});
     done();
   });
 
@@ -97,9 +97,9 @@ describe('The Epoxy file parsing', function() {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-plugin-regoptions.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({
-      plugins: {
-        './sample/plugin/path/regOptions': [{once: true, routes: {prefix: '/api/reg'}}],
-      },
+      registrations: [
+        {plugin: './sample/plugin/path/regOptions', options: {once: true, routes: {prefix: '/api/reg'}}},
+      ],
     });
     done();
   });
@@ -108,9 +108,9 @@ describe('The Epoxy file parsing', function() {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-plugin-pluginoptions.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({
-      plugins: {
-        './sample/plugin/path/pluginOptions': [{options: {debugLevel: 'INFO'}}],
-      },
+      registrations: [
+        {plugin: {register: './sample/plugin/path/pluginOptions', options: {debugLevel: 'INFO'}}},
+      ],
     });
     done();
   });
@@ -119,9 +119,9 @@ describe('The Epoxy file parsing', function() {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-plugin-alloptions.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({
-      plugins: {
-        './sample/plugin/path/allOptions': [{once: true, options: {debugLevel: 'INFO'}}],
-      },
+      registrations: [
+        {plugin: {register: './sample/plugin/path/allOptions', options: {debugLevel: 'INFO'}}, options: {once: true}},
+      ],
     });
     done();
   });
@@ -130,12 +130,10 @@ describe('The Epoxy file parsing', function() {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-plugin-multireg.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({
-      plugins: {
-        multiples: [
-          {select: 'primary', options: {debugLevel: 'WARN'}},
-          {select: 'secondary', options: {debugLevel: 'INFO'}},
-        ],
-      },
+      registrations: [
+        {plugin: {register: 'multiples', options: {debugLevel: 'WARN'}}, options: {select: 'primary'}},
+        {plugin: {register: 'multiples', options: {debugLevel: 'INFO'}}, options: {select: 'secondary'}},
+      ],
     });
     done();
   });
@@ -155,29 +153,15 @@ describe('The Epoxy file parsing', function() {
           },
         },
         connections: [{host: '127.0.0.1', port: 8001}],
-        plugins: {
-          auth: [{}],
-          utils: [{}],
-          '/var/path/to/session': [{
-            options: {
-              allowedDomains: ['localhost', 's.example.com'],
-            },
-          },],
-          './plugins/api': [{
-            routes: {prefix: '/api/v1'},
-            options: {showdocs: false},
-          },],
-          './plugins/uxtest': [{
-            select: 'uxr-group-142',
-            options: {useVersion: 20150901},
-          }, {
-            select: 'uxr-group-589',
-            options: {useVersion: 20151020},
-          },],
-          cdn: [{
-            routes: {prefix: '/assetfarm'},
-          },],
-        },
+        registrations: [
+          {plugin: 'auth'},
+          {plugin: 'utils'},
+          {plugin: {register: '/var/path/to/session', options: {allowedDomains: ['localhost', 's.example.com']}}},
+          {plugin: {register: './plugins/api', options: {showdocs: false}}, options: {routes: {prefix: '/api/v1'}}},
+          {plugin: {register: './plugins/uxtest', options: {useVersion: 20150901}}, options: {select: 'uxr-group-142'}},
+          {plugin: {register: './plugins/uxtest', options: {useVersion: 20151020}}, options: {select: 'uxr-group-589'}},
+          {plugin: 'cdn', options: {routes: {prefix: '/assetfarm'}}},
+        ],
       }
     );
     done();

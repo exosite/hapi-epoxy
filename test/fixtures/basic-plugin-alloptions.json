@@ -1,7 +1,8 @@
 {
-  "plugins": {
-    "./lib/foodtrucks": [
-      {"select": "lunch", "options": {"location": "Broadway"}}
-    ]
-  }
+  "registrations": [
+    {"plugin": {
+      "register": "./lib/foodtrucks",
+      "options": {"location": "Broadway"}
+    }, "options": {"select": "lunch"}}
+  ]
 }
