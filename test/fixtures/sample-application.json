@@ -24,45 +24,48 @@
       "port": 8001
     }
   ],
-  "plugins": {
-    "auth": {},
-    "utils": [{}],
-    "/var/path/to/session": {
-      "allowedDomains": [
-        "localhost",
-        "s.example.com"
-      ]
-    },
-    "./plugins/api": [
-      {
-        "routes": {
-          "prefix": "/api/v1"
-        },
-        "options": {
-          "showdocs": false
-        }
+  "registrations": [
+    {"plugin": "auth"},
+    {"plugin": "utils"},
+    {"plugin": {
+      "register": "/var/path/to/session",
+      "options": {
+        "allowedDomains": [
+          "localhost",
+          "s.example.com"
+        ]
       }
-    ],
-    "./plugins/uxtest": [
-      {
-        "select": "uxr-group-142",
-        "options": {
-          "useVersion": 20150901
-        }
-      },
-      {
-        "select": "uxr-group-589",
-        "options": {
-          "useVersion": 20151020
-        }
+    }},
+    {"plugin": {
+      "register": "./plugins/api",
+      "options": {
+        "showdocs": false
       }
-    ],
-    "cdn": [
-      {
-        "routes": {
-          "prefix": "/assetfarm"
-        }
+    }, "options": {
+      "routes": {
+        "prefix": "/api/v1"
       }
-    ]
-  }
+    }},
+    {"plugin": {
+      "register": "./plugins/uxtest",
+      "options": {
+        "useVersion": 20150901
+      }
+    }, "options": {
+      "select": "uxr-group-142"
+    }},
+    {"plugin": {
+      "register": "./plugins/uxtest",
+      "options": {
+        "useVersion": 20151020
+      }
+    }, "options": {
+      "select": "uxr-group-589"
+    }},
+    {"plugin": "cdn", "options": {
+      "routes": {
+        "prefix": "/assetfarm"
+      }
+    }}
+  ]
 }

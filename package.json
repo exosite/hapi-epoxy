@@ -18,10 +18,10 @@
     "type": "git",
     "url": "https://github.com/exosite/hapi-epoxy.git"
   },
-  "engines": {"node": ">=0.10.41", "npm": ">=2.0.0"},
+  "engines": {"node": ">=4.0.0", "npm": ">=2.0.0"},
   "devDependencies": {
-    "hapi": "^10.x.x",
-    "glue": "^2.4.0",
+    "hapi": "^13.x.x",
+    "glue": "^3.0.0",
     "gulp": "^3.9.0",
     "gulp-istanbul": "^0.10.2",
     "gulp-jasmine": "^2.1.0",
@@ -29,8 +29,8 @@
     "jasmine": "^2.3.2"
   },
   "dependencies": {
-    "bossy": "^2.0.0",
-    "hoek": "^2.16.3",
+    "bossy": "^3.0.0",
+    "hoek": "^4.0.0",
     "js-yaml": "^3.4.3"
   }
 }

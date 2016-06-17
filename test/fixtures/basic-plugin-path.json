@@ -1,8 +1,8 @@
 {
-  "plugins": {
-    "amodule": null,
-    "./a/relpath": {},
-    "./relpath2": [{}],
-    "/an/abspath": [{}]
-  }
+  "registrations": [
+    {"plugin": "amodule"},
+    {"plugin": "./a/relpath"},
+    {"plugin": "./relpath2"},
+    {"plugin": "/an/abspath"}
+  ]
 }
