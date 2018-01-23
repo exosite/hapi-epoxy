@@ -1,6 +1,6 @@
 {
   "name": "hapi-epoxy",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Flexible YAML configuration for Hapi",
   "license": "MIT",
   "main": "lib/index.js",
