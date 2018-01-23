@@ -5,7 +5,7 @@ server:
       - plugin
       - boom
   app:
-    testSetting: !epoxy
+    testSetting: !epoxy.bool
       value: true
       env: APP_IN_TEST
   connections:
@@ -14,7 +14,9 @@ server:
         credentials: true
 connections:
   - host: 127.0.0.1
-    port: 8001
+    port: !epoxy.number
+      value: 8001
+      env: APP_PORT
 plugins:
   # These are dependencies installed with the project.  See repo for details
   auth:
@@ -39,7 +41,7 @@ plugins:
            prefix: /api/v1
        pluginOptions:
          # Enable this only on dev and staging environments for now
-         showdocs: !epoxy
+         showdocs: !epoxy.bool
            value: false
            env: APP_SHOW_API_DOCS
   uxtest:

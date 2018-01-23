@@ -54,6 +54,26 @@ describe('The Epoxy file parsing', function() {
     done();
   });
 
+  it('can override the default value with the system variable for Epoxy boolean tags', function(done) {
+    process.env.EPOXY_BASIC_TAG_TEST = 'false';
+    expect(Epoxy.bond(
+      Fs.readFileSync('./test/fixtures/bool-tagged.yaml'), EPOXY_DEFAULT_CONFIG)
+    ).toEqual(
+      {server: {debug: {log: ['error', 'plugin', 'boom']}, app: {testSetting: false}}}
+    );
+    done();
+  });
+
+  it('can override the default value with the system variable for Epoxy number tags', function(done) {
+    process.env.EPOXY_BASIC_TAG_TEST = '1337';
+    expect(Epoxy.bond(
+      Fs.readFileSync('./test/fixtures/number-tagged.yaml'), EPOXY_DEFAULT_CONFIG)
+    ).toEqual(
+      {server: {debug: {log: ['error', 'plugin', 'boom']}, app: {testSetting: 1337}}}
+    );
+    done();
+  });
+
   it('will warn if the system environment is not set for an Epoxy tag', function(done) {
     delete process.env.EPOXY_BASIC_TAG_TEST;
     expect(Epoxy.bond(

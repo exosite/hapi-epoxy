@@ -1,0 +1,10 @@
+server:
+  debug:
+    log:
+      - error
+      - plugin
+      - boom
+  app:
+    testSetting: !epoxy.bool
+      value: Default Value
+      env: EPOXY_BASIC_TAG_TEST
