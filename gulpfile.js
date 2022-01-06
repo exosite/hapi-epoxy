@@ -10,7 +10,7 @@ gulp.task('instrument', function () {
     .pipe(istanbul.hookRequire());
 });
 
-gulp.task('coverage', ['instrument'], function () {
+gulp.task('coverage', gulp.series('instrument', function () {
   var hasErrors = 0;
   return gulp.src(['test/**/*.js'])
     .pipe(jasmine({
@@ -27,7 +27,7 @@ gulp.task('coverage', ['instrument'], function () {
     .on('end', function () {
       process.exit(hasErrors);
     });
-});
+}));
 
 gulp.task('test', function () {
   var hasErrors = 0;

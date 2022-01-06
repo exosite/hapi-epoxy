@@ -22,9 +22,9 @@
     "node": ">=8.0.0"
   },
   "devDependencies": {
-    "hapi": "^16.2.0",
-    "glue": "^4.0.0",
-    "gulp": "^3.9.0",
+    "hapi": "^17.x.x",
+    "glue": "^5.0.0",
+    "gulp": "^4.0.0",
     "gulp-istanbul": "^1.1.0",
     "gulp-jasmine": "^3.0.0",
     "istanbul": "^0.4.0",
