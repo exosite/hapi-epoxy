@@ -196,11 +196,12 @@ describe('Epoxy conversion from Glue manifests', function() {
   it('can handle a manifest without plugins', function(done) {
     expect(Epoxy.convertToEpoxy(require('./fixtures/basic-server.json'))).toEqual({
       server: {
+        host: '127.0.0.1',
+        port: 8001,
+        routes: {cors: {credentials: true}},
         debug: {log: ['error', 'plugin', 'boom']},
         app: {testSetting: true},
-        connections: {routes: {cors: {credentials: true}}},
       },
-      connections: [{host: '127.0.0.1', port: 8001}],
     });
     done();
   });
@@ -324,17 +325,16 @@ describe('Epoxy conversion from Glue manifests', function() {
     expect(Epoxy.convertToEpoxy(require('./fixtures/sample-application.json'))).toEqual(
       {
         server: {
+          host: '127.0.0.1',
+          port: 8001,
           debug: {log: ['error', 'plugin', 'boom']},
           app: {testSetting: true},
-          connections: {
-            routes: {
-              cors: {
-                credentials: true,
-              },
+          routes: {
+            cors: {
+              credentials: true,
             },
           },
         },
-        connections: [{host: '127.0.0.1', port: 8001}],
         plugins: {
           auth: {pluginPath: '', registrations: [{}]},
           utils: {pluginPath: '', registrations: [{}]},
