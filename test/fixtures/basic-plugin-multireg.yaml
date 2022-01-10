@@ -2,11 +2,11 @@ plugins:
   multiples:
     registrations:
       - registrationOptions:
-          select: primary      
+          select: primary
         pluginOptions:
           debugLevel: WARN
       - registrationOptions:
-          select: secondary 
+          select: secondary
         pluginOptions:
           debugLevel: INFO
 

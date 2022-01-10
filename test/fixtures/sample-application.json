@@ -10,20 +10,14 @@
     "app": {
       "testSetting": true
     },
-    "connections": {
-      "routes": {
-        "cors": {
-          "credentials": true
-        }
+    "routes": {
+      "cors": {
+        "credentials": true
       }
-    }
+    },
+    "host": "127.0.0.1",
+    "port": 8001
   },
-  "connections": [
-    {
-      "host": "127.0.0.1",
-      "port": 8001
-    }
-  ],
   "registrations": [
     {"plugin": "auth"},
     {"plugin": "utils"},

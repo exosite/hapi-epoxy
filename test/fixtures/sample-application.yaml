@@ -8,15 +8,13 @@ server:
     testSetting: !epoxy.bool
       value: true
       env: APP_IN_TEST
-  connections:
-    routes:
-      cors:
-        credentials: true
-connections:
-  - host: 127.0.0.1
-    port: !epoxy.number
-      value: 8001
-      env: APP_PORT
+  routes:
+    cors:
+      credentials: true
+  host: 127.0.0.1
+  port: !epoxy.number
+    value: 8001
+    env: APP_PORT
 plugins:
   # These are dependencies installed with the project.  See repo for details
   auth:

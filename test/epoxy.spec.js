@@ -121,7 +121,7 @@ describe('The Epoxy file parsing', function() {
     ).toEqual({
       register: {
         plugins: [
-          {plugin: './sample/plugin/path/regOptions', options: {once: true, routes: {prefix: '/api/reg'}}},
+          {plugin: './sample/plugin/path/regOptions', routes: {prefix: '/api/reg'}, once: true},
         ],
       },
     });
@@ -134,7 +134,7 @@ describe('The Epoxy file parsing', function() {
     ).toEqual({
       register: {
         plugins: [
-          {plugin: {register: './sample/plugin/path/pluginOptions', options: {debugLevel: 'INFO'}}},
+          {plugin: './sample/plugin/path/pluginOptions', options: {debugLevel: 'INFO'}},
         ],
       },
     });
@@ -147,7 +147,7 @@ describe('The Epoxy file parsing', function() {
     ).toEqual({
       register: {
         plugins: [
-          {plugin: {register: './sample/plugin/path/allOptions', options: {debugLevel: 'INFO'}}, options: {once: true}},
+          {plugin: './sample/plugin/path/allOptions', options: {debugLevel: 'INFO'}, once: true},
         ],
       },
     });
@@ -160,24 +160,23 @@ describe('The Epoxy file parsing', function() {
         server: {
           debug: {log: ['error', 'plugin', 'boom']},
           app: {testSetting: true},
-          connections: {
             routes: {
               cors: {
                 credentials: true,
               },
             },
-          },
+          host: '127.0.0.1',
+          port: 8001,
         },
-        connections: [{host: '127.0.0.1', port: 8001}],
         register: {
           plugins: [
             {plugin: 'auth'},
             {plugin: 'utils'},
-            {plugin: {register: '/var/path/to/session', options: {allowedDomains: ['localhost', 's.example.com']}}},
-            {plugin: {register: './plugins/api', options: {showdocs: false}}, options: {routes: {prefix: '/api/v1'}}},
-            {plugin: {register: './plugins/uxtest', options: {useVersion: 20150901}}, options: {select: 'uxr-group-142'}},
-            {plugin: {register: './plugins/uxtest', options: {useVersion: 20151020}}, options: {select: 'uxr-group-589'}},
-            {plugin: 'cdn', options: {routes: {prefix: '/assetfarm'}}},
+            {plugin: '/var/path/to/session', options: {allowedDomains: ['localhost', 's.example.com']}},
+            {plugin: './plugins/api', options: {showdocs: false }, routes: {prefix: '/api/v1'}},
+            {plugin: './plugins/uxtest', options: {useVersion: 20150901}, select: 'uxr-group-142'},
+            {plugin: './plugins/uxtest', options: {useVersion: 20151020}, select: 'uxr-group-589'},
+            {plugin: 'cdn', routes: {prefix: '/assetfarm'}},
           ],
         },
       }
@@ -392,16 +391,13 @@ describe('Epoxy conversion from Glue manifests', function() {
 });
 
 describe('Epoxy composition with Glue', function() {
-  it('works cleanly on a robust configuration file', function(done) {
+  it('works cleanly on a robust configuration file', function() {
     pending('Ideally this would verify the manifest is readable by Glue as a regression test');
   });
 
   it('works cleanly on an empty configuration file', function(done) {
     Glue.compose(
-      Epoxy.bond(Fs.readFileSync('./test/fixtures/empty.yaml')), {}, function(err, server) {
-        done();
-      }
-    );
+      Epoxy.bond(Fs.readFileSync('./test/fixtures/empty.yaml'))
+    ).then(done)
   });
-
 });

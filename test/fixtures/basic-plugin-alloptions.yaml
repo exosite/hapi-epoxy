@@ -3,7 +3,7 @@ plugins:
     pluginPath: './sample/plugin/path'
     registrations:
       - registrationOptions:
-          once: true      
+          once: true
         pluginOptions:
           debugLevel: INFO
 
