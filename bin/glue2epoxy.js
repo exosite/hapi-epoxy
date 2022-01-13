@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 'use strict';
 
-var Bossy = require('bossy');
+var Bossy = require('@hapi/bossy');
 var Epoxy = require('..');
 var Fs = require('fs');
 var Yaml = require('js-yaml');

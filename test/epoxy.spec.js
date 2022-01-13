@@ -1,6 +1,6 @@
 'use strict';
 
-var Glue = require('glue');
+var Glue = require('@hapi/glue');
 var Epoxy = require('..');
 var Fs = require('fs');
 
