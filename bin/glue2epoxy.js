@@ -1,14 +1,13 @@
 #! /usr/bin/env node
 'use strict';
 
-var Bossy = require('@hapi/bossy');
-var Epoxy = require('..');
-var Fs = require('fs');
-var Yaml = require('js-yaml');
-var Path = require('path');
+const Bossy = require('@hapi/bossy');
+const Epoxy = require('..');
+const Fs = require('fs');
+const Yaml = require('js-yaml');
 
 // Deal with the CLI
-var bossyDefinition = {
+const bossyDefinition = {
   e: {
     description: 'Destination for the Epoxy manifest.  If not specified, prints to stdout.',
     alias: 'epoxy-out',
@@ -22,7 +21,7 @@ var bossyDefinition = {
   },
 };
 
-var args = Bossy.parse(bossyDefinition);
+const args = Bossy.parse(bossyDefinition);
 
 // Deal with the CLI
 if (args instanceof Error) {
@@ -31,8 +30,8 @@ if (args instanceof Error) {
 }
 
 // Import, convert, and dump as YAML
-var glueJson = require(args.g);
-var epoxyYaml = Yaml.safeDump(Epoxy.convertToEpoxy(glueJson));
+const glueJson = require(args.g);
+const epoxyYaml = Yaml.safeDump(Epoxy.convertToEpoxy(glueJson));
 
 if (args.e) {
   Fs.writeFileSync(args.e, epoxyYaml);

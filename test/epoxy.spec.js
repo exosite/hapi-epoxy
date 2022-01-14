@@ -1,40 +1,40 @@
 'use strict';
 
-var Glue = require('@hapi/glue');
-var Epoxy = require('..');
-var Fs = require('fs');
+const Glue = require('@hapi/glue');
+const Epoxy = require('..');
+const Fs = require('fs');
 
-describe('The Epoxy file parsing', function() {
-  var EPOXY_DEFAULT_CONFIG = {
+describe('The Epoxy file parsing', () => {
+  const EPOXY_DEFAULT_CONFIG = {
     warnOnDefault: false,
     logger: jasmine.createSpyObj('logger', ['warn']),
   };
 
-  var EPOXY_LOG_CONFIG = {
+  const EPOXY_LOG_CONFIG = {
     warnOnDefault: true,
     logger: jasmine.createSpyObj('logger', ['warn']),
   };
 
-  it('can run without options', function(done) {
+  it('can run without options', (done) => {
     expect(Epoxy.bond(Fs.readFileSync('./test/fixtures/empty.yaml'))).toEqual({});
     done();
   });
 
-  it('can handle blank files', function(done) {
+  it('can handle blank files', (done) => {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/empty.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({});
     done();
   });
 
-  it('can handle simple YAML without Epoxy tags', function(done) {
+  it('can handle simple YAML without Epoxy tags', (done) => {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-tagless.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({server: {debug: {log: ['error', 'plugin', 'boom']}}});
     done();
   });
 
-  it('can handle simple YAML with Epoxy tags', function(done) {
+  it('can handle simple YAML with Epoxy tags', (done) => {
     delete process.env.EPOXY_BASIC_TAG_TEST;
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-tagged.yaml'), EPOXY_DEFAULT_CONFIG)
@@ -44,7 +44,7 @@ describe('The Epoxy file parsing', function() {
     done();
   });
 
-  it('can override the default value with the system variable for Epoxy tags', function(done) {
+  it('can override the default value with the system variable for Epoxy tags', (done) => {
     process.env.EPOXY_BASIC_TAG_TEST = 'foo';
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-tagged.yaml'), EPOXY_DEFAULT_CONFIG)
@@ -54,7 +54,7 @@ describe('The Epoxy file parsing', function() {
     done();
   });
 
-  it('can override the default value with the system variable for Epoxy boolean tags', function(done) {
+  it('can override the default value with the system variable for Epoxy boolean tags', (done) => {
     process.env.EPOXY_BASIC_TAG_TEST = 'false';
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/bool-tagged.yaml'), EPOXY_DEFAULT_CONFIG)
@@ -64,7 +64,7 @@ describe('The Epoxy file parsing', function() {
     done();
   });
 
-  it('can override the default value with the system variable for Epoxy number tags', function(done) {
+  it('can override the default value with the system variable for Epoxy number tags', (done) => {
     process.env.EPOXY_BASIC_TAG_TEST = '1337';
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/number-tagged.yaml'), EPOXY_DEFAULT_CONFIG)
@@ -74,7 +74,7 @@ describe('The Epoxy file parsing', function() {
     done();
   });
 
-  it('will warn if the system environment is not set for an Epoxy tag', function(done) {
+  it('will warn if the system environment is not set for an Epoxy tag', (done) => {
     delete process.env.EPOXY_BASIC_TAG_TEST;
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-tagged.yaml'), EPOXY_LOG_CONFIG)
@@ -86,14 +86,14 @@ describe('The Epoxy file parsing', function() {
     done();
   });
 
-  it('will handle a plugin with no settings at all', function(done) {
+  it('will handle a plugin with no settings at all', (done) => {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-plugin-noop.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({register: {plugins: [{plugin: './noop'}, {plugin: './noop-two'}]}});
     done();
   });
 
-  it('will handle a plugin with only a path', function(done) {
+  it('will handle a plugin with only a path', (done) => {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-plugin-path.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({
@@ -108,14 +108,14 @@ describe('The Epoxy file parsing', function() {
     done();
   });
 
-  it('will handle a plugin that is in node_modules', function(done) {
+  it('will handle a plugin that is in node_modules', (done) => {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-module-path.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({register: {plugins: [{plugin: 'npmReg'}]}});
     done();
   });
 
-  it('will handle a plugin with only register options', function(done) {
+  it('will handle a plugin with only register options', (done) => {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-plugin-regoptions.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({
@@ -128,7 +128,7 @@ describe('The Epoxy file parsing', function() {
     done();
   });
 
-  it('will handle a plugin with only plugin options', function(done) {
+  it('will handle a plugin with only plugin options', (done) => {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-plugin-pluginoptions.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({
@@ -141,7 +141,7 @@ describe('The Epoxy file parsing', function() {
     done();
   });
 
-  it('will handle a plugin with a custom path and full options', function(done) {
+  it('will handle a plugin with a custom path and full options', (done) => {
     expect(Epoxy.bond(
       Fs.readFileSync('./test/fixtures/basic-plugin-alloptions.yaml'), EPOXY_DEFAULT_CONFIG)
     ).toEqual({
@@ -154,7 +154,7 @@ describe('The Epoxy file parsing', function() {
     done();
   });
 
-  it('will handle a robust configuration file', function(done) {
+  it('will handle a robust configuration file', (done) => {
     expect(Epoxy.bond(Fs.readFileSync('./test/fixtures/sample-application.yaml'))).toEqual(
       {
         server: {
@@ -185,14 +185,14 @@ describe('The Epoxy file parsing', function() {
   });
 });
 
-describe('Epoxy conversion from Glue manifests', function() {
+describe('Epoxy conversion from Glue manifests', () => {
 
-  it('can handle blank files', function(done) {
+  it('can handle blank files', (done) => {
     expect(Epoxy.convertToEpoxy(require('./fixtures/empty.json'))).toEqual({});
     done();
   });
 
-  it('can handle a manifest without plugins', function(done) {
+  it('can handle a manifest without plugins', (done) => {
     expect(Epoxy.convertToEpoxy(require('./fixtures/basic-server.json'))).toEqual({
       server: {
         host: '127.0.0.1',
@@ -205,7 +205,7 @@ describe('Epoxy conversion from Glue manifests', function() {
     done();
   });
 
-  it('can handle plugins without options', function(done) {
+  it('can handle plugins without options', (done) => {
     expect(Epoxy.convertToEpoxy(require('./fixtures/basic-plugin-path.json'))).toEqual({
       plugins: {
         amodule: {
@@ -229,7 +229,7 @@ describe('Epoxy conversion from Glue manifests', function() {
     done();
   });
 
-  it('can handle plugins with server.register options', function(done) {
+  it('can handle plugins with server.register options', (done) => {
     expect(Epoxy.convertToEpoxy(require('./fixtures/basic-plugin-regoptions.json'))).toEqual({
       plugins: {
         authy: {
@@ -248,7 +248,7 @@ describe('Epoxy conversion from Glue manifests', function() {
     done();
   });
 
-  it('can handle plugins with plugin options', function(done) {
+  it('can handle plugins with plugin options', (done) => {
     expect(Epoxy.convertToEpoxy(require('./fixtures/basic-plugin-pluginoptions.json'))).toEqual({
       plugins: {
         stand: {
@@ -273,7 +273,7 @@ describe('Epoxy conversion from Glue manifests', function() {
     done();
   });
 
-  it('can handle a plugin with custom path and full options', function(done) {
+  it('can handle a plugin with custom path and full options', (done) => {
     expect(Epoxy.convertToEpoxy(require('./fixtures/basic-plugin-alloptions.json'))).toEqual({
       plugins: {
         foodtrucks: {
@@ -292,7 +292,7 @@ describe('Epoxy conversion from Glue manifests', function() {
     done();
   });
 
-  it('can handle a plugin with multiple registrations', function(done) {
+  it('can handle a plugin with multiple registrations', (done) => {
     expect(Epoxy.convertToEpoxy(require('./fixtures/basic-plugin-multireg.json'))).toEqual({
       plugins: {
         markets: {
@@ -320,7 +320,7 @@ describe('Epoxy conversion from Glue manifests', function() {
     done();
   });
 
-  it('works cleanly on a robust configuration file', function(done) {
+  it('works cleanly on a robust configuration file', (done) => {
     expect(Epoxy.convertToEpoxy(require('./fixtures/sample-application.json'))).toEqual(
       {
         server: {
@@ -390,12 +390,12 @@ describe('Epoxy conversion from Glue manifests', function() {
   });
 });
 
-describe('Epoxy composition with Glue', function() {
-  it('works cleanly on a robust configuration file', function() {
+describe('Epoxy composition with Glue', () => {
+  it('works cleanly on a robust configuration file', () => {
     pending('Ideally this would verify the manifest is readable by Glue as a regression test');
   });
 
-  it('works cleanly on an empty configuration file', function(done) {
+  it('works cleanly on an empty configuration file', (done) => {
     Glue.compose(
       Epoxy.bond(Fs.readFileSync('./test/fixtures/empty.yaml'))
     ).then(() => done())

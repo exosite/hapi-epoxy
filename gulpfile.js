@@ -1,8 +1,6 @@
-var gulp = require('gulp');
-var istanbul = require('gulp-istanbul');
-var jasmine = require('gulp-jasmine');
-
-var isWatching = false;
+const gulp = require('gulp');
+const istanbul = require('gulp-istanbul');
+const jasmine = require('gulp-jasmine');
 
 gulp.task('instrument', function () {
   return gulp.src(['lib/**/*.js'])

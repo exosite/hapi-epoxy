@@ -1,12 +1,11 @@
 #! /usr/bin/env node
 'use strict';
 
-var Bossy = require('@hapi/bossy');
-var Epoxy = require('..');
-var Fs = require('fs');
-var Yaml = require('js-yaml');
+const Bossy = require('@hapi/bossy');
+const Epoxy = require('..');
+const Fs = require('fs');
 
-var bossyDefinition = {
+const bossyDefinition = {
   e: {
     description: 'The Epoxy-compatible YAML manifest.',
     alias: 'epoxy-file',
@@ -20,7 +19,7 @@ var bossyDefinition = {
   },
 };
 
-var args = Bossy.parse(bossyDefinition);
+const args = Bossy.parse(bossyDefinition);
 
 // Deal with the CLI
 if (args instanceof Error) {
@@ -28,8 +27,8 @@ if (args instanceof Error) {
   process.exit(1);
 }
 
-var epoxyFileData = Fs.readFileSync(args.e);
-var glueManifest = JSON.stringify(Epoxy.bond(epoxyFileData), null, 2);
+const epoxyFileData = Fs.readFileSync(args.e);
+const glueManifest = JSON.stringify(Epoxy.bond(epoxyFileData), null, 2);
 
 if (args.g) {
   Fs.writeFileSync(args.g, glueManifest);
