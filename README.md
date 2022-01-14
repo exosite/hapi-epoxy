@@ -5,15 +5,14 @@
 *hapi-epoxy* is a module designed to extend off of two things that are limited by the current Glue
 manifest:
 
-  - Overriding by environment variables (Which is currently only possible on the command-line,
-    assuming you are using rejoice)
+  - Overriding by environment variables
   - Inability to document the config inside the config file itself (Since JSON doesn't natively
     support comments)
 
 It is designed to work alongside Glue, generating the object / JSON that Glue normally consumes
 from a given YAML as follows:
 
-    Glue.compose(Epoxy.bond(...), glueOptions, function (err, server) { ...});
+    await Glue.compose(Epoxy.bond(Fs.readFileSync('./test/fixtures/empty.yaml'), glueOptions));
 
 Examples of sample formats can be found in the `./test/fixtures/` directory.  In particular, the
 `sample-application.yaml` file has a decent example of the various forms of plugin configuration
