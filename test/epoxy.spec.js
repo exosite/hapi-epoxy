@@ -398,6 +398,6 @@ describe('Epoxy composition with Glue', function() {
   it('works cleanly on an empty configuration file', function(done) {
     Glue.compose(
       Epoxy.bond(Fs.readFileSync('./test/fixtures/empty.yaml'))
-    ).then(done)
+    ).then(() => done())
   });
 });
